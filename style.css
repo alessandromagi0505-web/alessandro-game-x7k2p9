@@ -1,0 +1,322 @@
+/* =========================================================
+   TOKEN DI DESIGN — modifica qui colori, font e dimensioni
+   per cambiare "look" a tutta la pagina in un colpo solo.
+   ========================================================= */
+:root {
+  --bg-top: #ffd9e8;
+  --bg-bottom: #ffc2dc;
+  --card-bg: #fffaf9;
+  --text-main: #7a3b5e;
+  --text-soft: #b06a92;
+  --yes-color: #ff6fa5;
+  --yes-color-dark: #e2508a;
+  --no-color: #fff0f6;
+  --no-color-border: #ffbcd9;
+  --gold: #ffd166;
+  --radius-card: 28px;
+  --radius-btn: 999px;
+  --font-display: "Fredoka", sans-serif;
+  --font-body: "Quicksand", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  background: linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   PALCO + CARD CENTRALE
+   ========================================================= */
+.stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  padding: 40px 32px 36px;
+  box-shadow:
+    0 20px 45px rgba(216, 78, 138, 0.25),
+    0 2px 0 rgba(255, 255, 255, 0.6) inset;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* piccola "orecchietta" decorativa in alto, stile fiocco */
+.card::before {
+  content: "🎀";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  filter: drop-shadow(0 4px 6px rgba(216, 78, 138, 0.35));
+}
+
+/* =========================================================
+   PALLINI DI AVANZAMENTO (5 domande)
+   ========================================================= */
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--no-color-border);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.progress-dot.active {
+  background: var(--yes-color);
+  transform: scale(1.3);
+}
+
+.progress-dot.done {
+  background: var(--gold);
+}
+
+/* =========================================================
+   SCHERMATE (domanda / risultato) + transizione fade
+   ========================================================= */
+.screen {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+/* stato usato via JS per far sparire/apparire dolcemente il contenuto */
+.screen.fade-out {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.screen.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 6vw, 28px);
+  line-height: 1.35;
+  margin: 4px 0 32px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================
+   PULSANTI
+   ========================================================= */
+.buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.94);
+}
+
+.btn-yes {
+  background: var(--yes-color);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 111, 165, 0.45);
+}
+
+.btn-yes:hover {
+  background: var(--yes-color-dark);
+  transform: translateY(-2px);
+}
+
+.btn-no {
+  background: var(--no-color);
+  color: var(--text-main);
+  border: 2px solid var(--no-color-border);
+}
+
+.btn-no:hover {
+  transform: translateY(-2px);
+  border-color: var(--yes-color);
+}
+
+.btn-restart {
+  margin-top: 26px;
+  background: var(--yes-color);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 111, 165, 0.45);
+}
+
+.btn-restart:hover {
+  background: var(--yes-color-dark);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SCHERMATA RISULTATO
+   ========================================================= */
+.result-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 18px;
+  animation: pop-in 0.6s ease;
+}
+
+/* Se l'immagine non è ancora stata aggiunta in assets/,
+   nascondiamo l'icona "immagine rotta" senza rovinare il layout */
+.result-image::before {
+  content: "";
+}
+
+.result-line {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+.result-line-1 {
+  font-size: 18px;
+  color: var(--text-soft);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.result-line-2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   DECORAZIONI FLUTTUANTI DI SFONDO (cuoricini/stelline)
+   ========================================================= */
+.floaties {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floaty {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0.55;
+  animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — smartphone
+   ========================================================= */
+@media (max-width: 420px) {
+  .card {
+    padding: 32px 22px 28px;
+    border-radius: 22px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Rispetta le preferenze di riduzione del movimento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

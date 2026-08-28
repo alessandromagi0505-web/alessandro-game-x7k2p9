@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Un piccolo test per te 💗</title>
+
+  <!-- Font carine e rotondeggianti, in stile "kawaii" -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Decorazioni fluttuanti sullo sfondo (cuoricini e stelline) -->
+  <div class="floaties" id="floaties" aria-hidden="true"></div>
+
+  <main class="stage">
+    <div class="card" id="card">
+
+      <!-- Barra di avanzamento: quante domande mancano -->
+      <div class="progress" id="progress" aria-hidden="true">
+        <span class="progress-dot" data-index="0"></span>
+        <span class="progress-dot" data-index="1"></span>
+        <span class="progress-dot" data-index="2"></span>
+        <span class="progress-dot" data-index="3"></span>
+        <span class="progress-dot" data-index="4"></span>
+      </div>
+
+      <!-- SCHERMATA DOMANDA -->
+      <section class="screen question-screen" id="questionScreen">
+        <p class="eyebrow">domanda <span id="qNumber">1</span> di 5</p>
+        <h1 class="question-text" id="questionText">Caricamento...</h1>
+
+        <div class="buttons">
+          <button class="btn btn-no" id="btnNo">NO</button>
+          <button class="btn btn-yes" id="btnYes">SÌ</button>
+        </div>
+      </section>
+
+      <!-- SCHERMATA RISULTATO (nascosta finché non finisce il quiz) -->
+      <section class="screen result-screen hidden" id="resultScreen">
+        <img
+          class="result-image"
+          src="assets/hello-kitty.png"
+          alt="Hello Kitty"
+          id="resultImage"
+        />
+        <p class="result-line result-line-1">In base alle tue risposte...</p>
+        <p class="result-line result-line-2">dovresti vedere Alessandro<br>prima che parta.</p>
+
+        <button class="btn btn-restart" id="btnRestart">Ricomincia 🎀</button>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
